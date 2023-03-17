@@ -54,12 +54,10 @@ namespace BaseSim2023
 
         private void GameView_Paint(object sender, PaintEventArgs e)
         {
-            /*
-            diffLabel.Text = "Difficulté : " + "?";
-            turnLabel.Text = "Tour " + "?";
-            moneyLabel.Text = "Trésor : " + "?" + " pièces d'or";
-            gloryLabel.Text = "Gloire : " + "?";
-            */
+            diffLabel.Text = "Difficulté : " + theWorld.TheDifficulty;
+            turnLabel.Text = "Tour " + theWorld.Turns;
+            moneyLabel.Text = "Trésor : " + theWorld.Money + " pièces d'or";
+            gloryLabel.Text = "Gloire : " + theWorld.Glory;
             nextButton.Visible = false;
         }
         private void NextButton_Click(object sender, EventArgs e)
