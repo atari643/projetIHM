@@ -22,3 +22,15 @@
 \\iut.bx\Etudiants\Home\qartigala\Desktop\projetIHM\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.csproj.CoreCompileInputs.cache
 \\iut.bx\Etudiants\Home\qartigala\Desktop\projetIHM\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.exe
 \\iut.bx\Etudiants\Home\qartigala\Desktop\projetIHM\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.pdb
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\bin\Debug\BaseSim2023.exe.config
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\bin\Debug\BaseSim2023.exe
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\bin\Debug\BaseSim2023.pdb
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.csproj.AssemblyReference.cache
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.csproj.SuggestedBindingRedirects.cache
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.DifficultyView.resources
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.GameView.resources
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.Properties.Resources.resources
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.csproj.GenerateResource.cache
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.csproj.CoreCompileInputs.cache
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.exe
+Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.pdb
