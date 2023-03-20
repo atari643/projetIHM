@@ -247,9 +247,20 @@ namespace BaseSim2023
         /// <param name="indexedValue">The value responsible or null for debt</param>
         public static void LoseDialog(IndexedValue indexedValue)
         {
+            boiteFin fin;
             theView.WriteLine("Partie perdue." +
-                (indexedValue==null ? " Dette insurmontable." : indexedValue.CompletePresentation()));
+                (indexedValue == null ? " Dette insurmontable." : indexedValue.CompletePresentation()));
+            if (indexedValue == null)
+            {
+                fin = new boiteFin("Partie perdue : dette insurmontable.");
+            }
+            else
+            {
+                fin = new boiteFin("Partie perdue : " + indexedValue.CompletePresentation());
+            }
+            fin.ShowDialog();
             theView.Refresh();
+            
         }
         /// <summary>
         /// Method called whenever the game is won
@@ -257,6 +268,7 @@ namespace BaseSim2023
         public static void WinDialog()
         {
             theView.WriteLine("Partie gagnée.");
+            boiteFin fin = new boiteFin("Partie gagnée.");
             theView.Refresh();
         }
         /// <summary>
@@ -328,5 +340,6 @@ namespace BaseSim2023
             theView.Refresh();
         }
         #endregion
+
     }
 }
