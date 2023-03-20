@@ -58,11 +58,10 @@ namespace BaseSim2023
             turnLabel.Text = "Tour " + theWorld.Turns;
             moneyLabel.Text = "Trésor : " + theWorld.Money + " pièces d'or";
             gloryLabel.Text = "Gloire : " + theWorld.Glory;
-            nextButton.Visible = false;
         }
         private void NextButton_Click(object sender, EventArgs e)
         {
-
+            theWorld.NextTurn();
         }
 
         private void GameView_DoubleClick(object sender, EventArgs e)
@@ -84,5 +83,10 @@ namespace BaseSim2023
             autoconfirm = false;
         }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
