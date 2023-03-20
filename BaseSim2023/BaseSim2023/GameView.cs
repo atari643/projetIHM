@@ -82,7 +82,25 @@ namespace BaseSim2023
             }
             autoconfirm = false;
         }
-        
+        public void LoseDialog(IndexedValue indexedValue)
+        {
+            if (indexedValue == null)
+            {
+            MessageBox.Show("Partie perdue : dette insurmontable.");
+            }
+            else
+            {
+            MessageBox.Show("Partie perdue : "
+            + indexedValue.CompletePresentation());
+            }
+            nextButton.Enabled = false;
+            }
+        public void WinDialog()
+        {
+            MessageBox.Show("Partie Gagnée !");
+            nextButton.Enabled = false;
+        }
+
         #endregion
     }
 }
