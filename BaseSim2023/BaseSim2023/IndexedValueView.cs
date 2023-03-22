@@ -23,9 +23,10 @@ namespace BaseSim2023
         public void Dessine(Graphics g)
         {
             Point PositionEcran = Origine;
-            Rectangle r = new Rectangle(PositionEcran, taille);
+            Rectangle r = new Rectangle(PositionEcran, new Size(100,50));
             Pen p = new Pen(couleur = Color.Black, Epaisseur = 2);
             g.DrawRectangle(p, r);
+            g.DrawString("" + valeur, new Font("Arial", 10, FontStyle.Bold), Brushes.Fuchsia, Origine);
         }
     }
     

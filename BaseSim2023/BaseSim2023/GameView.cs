@@ -12,7 +12,7 @@ namespace BaseSim2023
         private readonly WorldState theWorld;
         private Rectangle PolRectangle { get; set; } = new Rectangle(0, 600, 1800, 300);
         private Rectangle GrpRectangle { get; set; } = new Rectangle(600, 300, 600, 300);
-        private Rectangle PerCrsRectangle { get; set; } = new Rectangle(0, 100, 1800, 300);
+        private Rectangle PerCrsRectangle { get; set; } = new Rectangle(0, 25, 1800, 300);
 
         private Rectangle I1Rectangle { get; set; } = new Rectangle(0, 300, 600, 300);
         private Rectangle I2Rectangle { get; set; } = new Rectangle(1200, 300, 600, 300);
@@ -30,7 +30,7 @@ namespace BaseSim2023
             InitializeComponent();
             theWorld = world;
             int margin = 15;
-            int w = 100;
+            int w = 200;
             int h = 100;
             int xPol = PolRectangle.X + margin;
             int yPol = PolRectangle.Y + margin;
