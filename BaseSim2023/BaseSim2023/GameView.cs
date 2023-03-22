@@ -102,5 +102,10 @@ namespace BaseSim2023
         }
 
         #endregion
+
+        private void turnLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
