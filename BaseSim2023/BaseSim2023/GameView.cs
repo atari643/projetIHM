@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -9,6 +10,18 @@ namespace BaseSim2023
     {
         private bool autoconfirm = false;
         private readonly WorldState theWorld;
+        private Rectangle PolRectangle { get; set; } = new Rectangle(0, 600, 1800, 300);
+        private Rectangle GrpRectangle { get; set; } = new Rectangle(600, 300, 600, 300);
+        private Rectangle PerCrsRectangle { get; set; } = new Rectangle(0, 100, 1800, 300);
+
+        private Rectangle I1Rectangle { get; set; } = new Rectangle(0, 300, 600, 300);
+        private Rectangle I2Rectangle { get; set; } = new Rectangle(1200, 300, 600, 300);
+
+        private List<IndexedValueView> polViews;
+        private List<IndexedValueView> grpViews;
+        private List<IndexedValueView> perCrsViews;
+        private List<IndexedValueView> I1Views;
+        private List<IndexedValueView> I2Views;
         /// <summary>
         /// The constructor for the main window
         /// </summary>
@@ -16,7 +29,94 @@ namespace BaseSim2023
         {
             InitializeComponent();
             theWorld = world;
+            int margin = 15;
+            int w = 100;
+            int h = 100;
+            int xPol = PolRectangle.X + margin;
+            int yPol = PolRectangle.Y + margin;
+            polViews = new List<IndexedValueView>();
+            foreach (IndexedValue p in theWorld.Policies)
+            {
+                IndexedValueView view = new IndexedValueView{ Origine = new Point(xPol, yPol), valeur = p }; 
+                polViews.Add(view);
+                xPol += w+margin;
+                if (xPol + w > PolRectangle.Right)
+                {
+                    xPol = PolRectangle.X + margin;
+                    yPol += h+margin;
+                }
+            }
+            int xGrp = GrpRectangle.X + margin;
+            int yGrp = GrpRectangle.Y + margin;
+            grpViews = new List<IndexedValueView>();
+            foreach (IndexedValue p in theWorld.Groups)
+            {
+                IndexedValueView view = new IndexedValueView { Origine = new Point(xGrp, yGrp), valeur = p };
+                grpViews.Add(view);
+                xGrp += w + margin;
+                if (xGrp + w > GrpRectangle.Right)
+                {
+                    xGrp = GrpRectangle.X + margin;
+                    yGrp += h + margin;
+                }
+            }
+            int xPerCrs = PerCrsRectangle.X + margin;
+            int yPerCrs = PerCrsRectangle.Y + margin;
+            perCrsViews = new List<IndexedValueView>();
+            foreach (IndexedValue p in theWorld.Perks)
+            {
+                IndexedValueView view = new IndexedValueView { Origine = new Point(xPerCrs, yPerCrs), valeur = p };
+                perCrsViews.Add(view);
+                xPerCrs += w + margin;
+                if (xPerCrs + w > PerCrsRectangle.Right)
+                {
+                    xPerCrs = PerCrsRectangle.X + margin;
+                    yPerCrs += h + margin;
+                }
+            }
+            foreach (IndexedValue p in theWorld.Crises)
+            {
+                IndexedValueView view = new IndexedValueView { Origine = new Point(xPerCrs, yPerCrs), valeur = p };
+                perCrsViews.Add(view);
+                xPerCrs += w + margin;
+                if (xPerCrs + w > PerCrsRectangle.Right)
+                {
+                    xPerCrs = PerCrsRectangle.X + margin;
+                    yPerCrs += h + margin;
+                }
+            }
+            int xI1 = I1Rectangle.X + margin;
+            int yI1 = I1Rectangle.Y + margin;
+            I1Views = new List<IndexedValueView>();
+            for (int i = 0; i < theWorld.Indicators.Count/2; i++)
+            {
+                IndexedValue p = theWorld.Indicators[i];
+                IndexedValueView view = new IndexedValueView { Origine = new Point(xI1, yI1), valeur = p };
+                I1Views.Add(view);
+                xI1 += w + margin;
+                if (xI1 + w > I1Rectangle.Right)
+                {
+                    xI1 = I1Rectangle.X + margin;
+                    yI1 += h + margin;
+                }
+            }
+            int xI2 = I2Rectangle.X + margin;
+            int yI2 = I2Rectangle.Y + margin;
+            I2Views = new List<IndexedValueView>();
+            for (int i = (theWorld.Indicators.Count/2)+1; i < theWorld.Indicators.Count; i++)
+            {
+                IndexedValue p = theWorld.Indicators[i];
+                IndexedValueView view = new IndexedValueView { Origine = new Point(xI2, yI2), valeur = p };
+                I2Views.Add(view);
+                xI2 += w + margin;
+                if (xI2 + w > I2Rectangle.Right)
+                {
+                    xI2 = I2Rectangle.X + margin;
+                    yI2 += h + margin;
+                }
+            }
         }
+        
         /// <summary>
         /// Method called by the controler whenever some text should be displayed
         /// </summary>
@@ -58,6 +158,26 @@ namespace BaseSim2023
             turnLabel.Text = "Tour " + theWorld.Turns;
             moneyLabel.Text = "Trésor : " + theWorld.Money + " pièces d'or";
             gloryLabel.Text = "Gloire : " + theWorld.Glory;
+            foreach (IndexedValueView view in polViews)
+            {
+                view.Dessine(e.Graphics);
+            }
+            foreach (IndexedValueView view in grpViews)
+            {
+                view.Dessine(e.Graphics);
+            }
+            foreach (IndexedValueView view in perCrsViews)
+            {
+                view.Dessine(e.Graphics);
+            }
+            foreach (IndexedValueView view in I1Views)
+            {
+                view.Dessine(e.Graphics);
+            }
+            foreach (IndexedValueView view in I2Views)
+            {
+                view.Dessine(e.Graphics);
+            }
         }
         private void NextButton_Click(object sender, EventArgs e)
         {
