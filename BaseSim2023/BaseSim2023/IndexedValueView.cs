@@ -12,20 +12,19 @@ namespace BaseSim2023
     {
         public IndexedValue valeur;
 
-        public Point Origine { get; set; } = new Point(0, 0);
+        public Point Origine { get; set; }
 
         public Size taille { get; set;}
 
-        public Color couleur;
+        public Color couleur { get; set; }
 
-        public int Epaiseur;
-
+        public int Epaisseur { get; set; }
 
         public void Dessine(Graphics g)
         {
             Point PositionEcran = Origine;
             Rectangle r = new Rectangle(PositionEcran, taille);
-            Pen p = new Pen(couleur, Epaiseur);
+            Pen p = new Pen(couleur = Color.Black, Epaisseur = 2);
             g.DrawRectangle(p, r);
         }
     }

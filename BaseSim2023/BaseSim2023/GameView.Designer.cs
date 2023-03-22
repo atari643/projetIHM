@@ -96,10 +96,10 @@ namespace BaseSim2023
             // 
             // inputTextBox
             // 
-            this.inputTextBox.Location = new System.Drawing.Point(31, 181);
+            this.inputTextBox.Location = new System.Drawing.Point(11, 92);
             this.inputTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.inputTextBox.Name = "inputTextBox";
-            this.inputTextBox.Size = new System.Drawing.Size(52, 20);
+            this.inputTextBox.Size = new System.Drawing.Size(100, 20);
             this.inputTextBox.TabIndex = 0;
             this.inputTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputTextBox_KeyDown);
             // 
@@ -107,10 +107,10 @@ namespace BaseSim2023
             // 
             this.outputListBox.FormattingEnabled = true;
             this.outputListBox.HorizontalScrollbar = true;
-            this.outputListBox.Location = new System.Drawing.Point(45, 93);
+            this.outputListBox.Location = new System.Drawing.Point(11, 43);
             this.outputListBox.Margin = new System.Windows.Forms.Padding(2);
             this.outputListBox.Name = "outputListBox";
-            this.outputListBox.Size = new System.Drawing.Size(100, 17);
+            this.outputListBox.Size = new System.Drawing.Size(100, 43);
             this.outputListBox.TabIndex = 1;
             // 
             // GameView
