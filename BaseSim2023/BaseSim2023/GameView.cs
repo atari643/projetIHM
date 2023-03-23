@@ -10,12 +10,12 @@ namespace BaseSim2023
     {
         private bool autoconfirm = false;
         private readonly WorldState theWorld;
-        private Rectangle PolRectangle { get; set; } = new Rectangle(0, 600, 1800, 300);
-        private Rectangle GrpRectangle { get; set; } = new Rectangle(600, 300, 600, 300);
-        private Rectangle PerCrsRectangle { get; set; } = new Rectangle(0, 25, 1800, 300);
+        private Rectangle PolRectangle { get; set; } = new Rectangle(0, 700, 1920, 300);
+        private Rectangle GrpRectangle { get; set; } = new Rectangle(500, 400, 600, 300);
+        private Rectangle PerCrsRectangle { get; set; } = new Rectangle(0, 75, 1920, 300);
 
-        private Rectangle I1Rectangle { get; set; } = new Rectangle(0, 300, 600, 300);
-        private Rectangle I2Rectangle { get; set; } = new Rectangle(1200, 300, 600, 300);
+        private Rectangle I1Rectangle { get; set; } = new Rectangle(0, 400, 600, 300);
+        private Rectangle I2Rectangle { get; set; } = new Rectangle(1200, 400, 600, 300);
 
         private List<IndexedValueView> polViews;
         private List<IndexedValueView> grpViews;
@@ -29,12 +29,13 @@ namespace BaseSim2023
         {
             InitializeComponent();
             theWorld = world;
-            int margin = 15;
+            int margin = 0;
             int w = 200;
             int h = 100;
             int xPol = PolRectangle.X + margin;
             int yPol = PolRectangle.Y + margin;
             polViews = new List<IndexedValueView>();
+
             foreach (IndexedValue p in theWorld.Policies)
             {
                 IndexedValueView view = new IndexedValueView{ Origine = new Point(xPol, yPol), valeur = p }; 
@@ -46,8 +47,9 @@ namespace BaseSim2023
                     yPol += h+margin;
                 }
             }
-            int xGrp = GrpRectangle.X + margin;
             int yGrp = GrpRectangle.Y + margin;
+            margin = 50;
+            int xGrp = GrpRectangle.X + margin;
             grpViews = new List<IndexedValueView>();
             foreach (IndexedValue p in theWorld.Groups)
             {
@@ -60,6 +62,7 @@ namespace BaseSim2023
                     yGrp += h + margin;
                 }
             }
+            margin = 5;
             int xPerCrs = PerCrsRectangle.X + margin;
             int yPerCrs = PerCrsRectangle.Y + margin;
             perCrsViews = new List<IndexedValueView>();
@@ -88,8 +91,10 @@ namespace BaseSim2023
             int xI1 = I1Rectangle.X + margin;
             int yI1 = I1Rectangle.Y + margin;
             I1Views = new List<IndexedValueView>();
+            margin = 1;
             for (int i = 0; i < theWorld.Indicators.Count/2; i++)
             {
+
                 IndexedValue p = theWorld.Indicators[i];
                 IndexedValueView view = new IndexedValueView { Origine = new Point(xI1, yI1), valeur = p };
                 I1Views.Add(view);
@@ -158,14 +163,21 @@ namespace BaseSim2023
             turnLabel.Text = "Tour " + theWorld.Turns;
             moneyLabel.Text = "Trésor : " + theWorld.Money + " pièces d'or";
             gloryLabel.Text = "Gloire : " + theWorld.Glory;
+            Pen p = new Pen(Color.Black, 2);
+            e.Graphics.DrawRectangle(p, new Rectangle(PolRectangle.X, PolRectangle.Y, PolRectangle.Width-20, PolRectangle.Height-20));
+            e.Graphics.DrawString("" + polViews[0].valeur.Type, new Font("Arial", 30, FontStyle.Bold), Brushes.Black, new Point(polViews[0].Origine.X, polViews[0].Origine.Y-50));
             foreach (IndexedValueView view in polViews)
             {
                 view.Dessine(e.Graphics);
             }
+            e.Graphics.DrawRectangle(p, new Rectangle(GrpRectangle.X, GrpRectangle.Y, GrpRectangle.Width-30, GrpRectangle.Height-40));
+            e.Graphics.DrawString("" + grpViews[0].valeur.Type, new Font("Arial", 30, FontStyle.Bold), Brushes.Black, new Point(grpViews[0].Origine.X, grpViews[0].Origine.Y - 50));
             foreach (IndexedValueView view in grpViews)
             {
                 view.Dessine(e.Graphics);
             }
+            e.Graphics.DrawRectangle(p, new Rectangle(PerCrsRectangle.X, PerCrsRectangle.Y, PerCrsRectangle.Width, PerCrsRectangle.Height - 40));
+            e.Graphics.DrawString("" + perCrsViews[0].valeur.Type, new Font("Arial", 30, FontStyle.Bold), Brushes.Black, new Point(perCrsViews[0].Origine.X, perCrsViews[0].Origine.Y - 50));
             foreach (IndexedValueView view in perCrsViews)
             {
                 view.Dessine(e.Graphics);
