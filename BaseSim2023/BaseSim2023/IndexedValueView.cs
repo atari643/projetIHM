@@ -14,16 +14,22 @@ namespace BaseSim2023
 
         public Point Origine { get; set; }
 
-        public Size taille { get; set;}
+        public Size taille { get; set; } = new Size(165, 50);
 
         public Color couleur { get; set; }
 
         public int Epaisseur { get; set; }
 
+        public bool Contient(Point p)
+        {
+            Rectangle r = new Rectangle(Origine, taille);
+            return r.Contains(p);
+        }
+
         public void Dessine(Graphics g)
         {
             Point PositionEcran = Origine;
-            Rectangle r = new Rectangle(PositionEcran, new Size(165,50));
+            Rectangle r = new Rectangle(PositionEcran, taille);
             Pen p = new Pen(couleur = Color.Black, Epaisseur = 2);
             g.DrawRectangle(p, r);
             g.DrawString("" + valeur, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, Origine);

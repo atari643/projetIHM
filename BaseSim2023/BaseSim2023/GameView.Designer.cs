@@ -110,7 +110,7 @@ namespace BaseSim2023
             this.outputListBox.Location = new System.Drawing.Point(11, 43);
             this.outputListBox.Margin = new System.Windows.Forms.Padding(2);
             this.outputListBox.Name = "outputListBox";
-            this.outputListBox.Size = new System.Drawing.Size(100, 43);
+            this.outputListBox.Size = new System.Drawing.Size(172, 30);
             this.outputListBox.TabIndex = 1;
             // 
             // GameView
@@ -132,6 +132,7 @@ namespace BaseSim2023
             this.Text = "Fenêtre Principale";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameView_Paint);
             this.DoubleClick += new System.EventHandler(this.GameView_DoubleClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameView_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

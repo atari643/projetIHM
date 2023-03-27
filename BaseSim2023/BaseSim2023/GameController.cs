@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace BaseSim2023
 {
@@ -270,20 +271,21 @@ namespace BaseSim2023
         {
             if (!arg.Contains(" "))
             {
-                theView.WriteLine("erreur texte application politique : " + arg);
+                
+                MessageBox.Show("erreur texte application politique : " + arg);
                 return;
             }
             string pol = arg.Split(' ')[0];
             int.TryParse(arg.Split(' ')[1], out int amount);
             if (amount < 0)
             {
-                theView.WriteLine("erreur nombre application politique : " + arg);
+                MessageBox.Show("erreur nombre application politique : " + arg);
                 return;
             }
             IndexedValue val = theWorld.FindPolicyOrDefault(pol);
             if (val==null)
             {
-                theView.WriteLine("erreur nom application politique : " + arg);
+                MessageBox.Show("erreur nom application politique : " + arg);
                 return;
             }
 
@@ -297,7 +299,7 @@ namespace BaseSim2023
                 return;
             }
             val.PreviewPolicyChange(ref amount, out mCost, out gCost);
-            theView.WriteLine("Estimation : " + mCost + " pièces (par tour) et " + gCost + " gloire.");
+            MessageBox.Show("Estimation : " + mCost + " pièces (par tour) et " + gCost + " gloire.");
             if (!ConfirmDialog())
             {
                 return;
@@ -306,18 +308,18 @@ namespace BaseSim2023
             {
                 if (theWorld.CostGlory(gCost))
                 {
-                    theView.WriteLine("Changement effectue pour " + gCost + " gloire.");
+                    MessageBox.Show("Changement effectue pour " + gCost + " gloire.");
                     val.ChangeTo(amount, out _, out _);
                     theView.Refresh();
                     return;
                 }
                 else
                 {
-                    theView.WriteLine("Gloire insuffisante : " + theWorld.Glory);
+                    MessageBox.Show("Gloire insuffisante : " + theWorld.Glory);
                     return;
                 }
             }
-            theView.WriteLine("Changement effectué.");
+            MessageBox.Show("Changement effectué.");
             val.ChangeTo(amount, out _, out _);
             theView.Refresh();
         }

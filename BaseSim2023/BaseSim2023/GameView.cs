@@ -17,11 +17,15 @@ namespace BaseSim2023
         private Rectangle I1Rectangle { get; set; } = new Rectangle(0, 400, 600, 300);
         private Rectangle I2Rectangle { get; set; } = new Rectangle(1200, 400, 600, 300);
 
-        private List<IndexedValueView> polViews;
+        List<IndexedValueView> polViews;
         private List<IndexedValueView> grpViews;
         private List<IndexedValueView> perCrsViews;
         private List<IndexedValueView> I1Views;
         private List<IndexedValueView> I2Views;
+        private int w;
+        private int h;
+        private int xPol;
+        private int yPol;
         /// <summary>
         /// The constructor for the main window
         /// </summary>
@@ -30,10 +34,10 @@ namespace BaseSim2023
             InitializeComponent();
             theWorld = world;
             int margin = 0;
-            int w = 200;
-            int h = 100;
-            int xPol = PolRectangle.X + margin;
-            int yPol = PolRectangle.Y + margin;
+            w = 200;
+            h = 100;
+            xPol = PolRectangle.X + margin;
+            yPol = PolRectangle.Y + margin;
             polViews = new List<IndexedValueView>();
 
             foreach (IndexedValue p in theWorld.Policies)
@@ -238,6 +242,39 @@ namespace BaseSim2023
         private void turnLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private IndexedValueView polSelection(Point p)
+        {
+            IndexedValueView res = null;
+            int i = 0;
+            while (res == null && i < polViews.Count)
+            {
+               
+                if (polViews[i].Contient(p))
+                {
+                    res = polViews[i];
+                }
+                i++;
+            }
+            return res;
+        }
+
+        private void GameView_MouseDown(object sender, MouseEventArgs e)
+        {   
+            if (e.Button == MouseButtons.Left)
+            {
+                IndexedValueView selection = polSelection(e.Location);
+                if (selection != null)
+                {
+                    policyChange fen = new policyChange(selection.valeur.Name, selection.valeur.MinValue, selection.valeur.MaxValue, selection.valeur.Value);
+                    if (fen.ShowDialog() == DialogResult.OK)
+                    {
+                        GameController.ApplyPolicyChanges(selection.valeur.Name + " " + fen.numVal());
+                    }
+                }
+            }
+            Refresh();
         }
     }
 }
