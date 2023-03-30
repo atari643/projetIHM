@@ -34,7 +34,6 @@ namespace BaseSim2023
             {
                 return false;
             }
-            
             return r.Contains(p);
         }
 

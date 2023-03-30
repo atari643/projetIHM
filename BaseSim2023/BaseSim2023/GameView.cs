@@ -336,5 +336,20 @@ namespace BaseSim2023
             }
             Refresh();
         }
+
+        private void GameView_MouseMove(object sender, MouseEventArgs e)
+        {
+            IndexedValueView selection = polSelection(e.Location);
+            if (selection != null) {
+                List<IndexedValue> list = new List<IndexedValue>();
+                foreach (IndexedValue test in selection.valeur.OutputWeights.Keys)
+                {
+                    list.Add(test);
+                }
+                Console.WriteLine(list.Count);
+            }
+            
+            
+        }
     }
 }
