@@ -35,3 +35,4 @@ Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.csproj.
 Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.exe
 Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.pdb
 Z:\R2.02\projets\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.policyChange.resources
+\\iut.bx\Etudiants\Home\qartigala\Desktop\projetIHM\projetihm\BaseSim2023\BaseSim2023\obj\Debug\BaseSim2023.policyChange.resources

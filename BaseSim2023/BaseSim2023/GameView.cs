@@ -172,27 +172,27 @@ namespace BaseSim2023
             e.Graphics.DrawString("" + polViews[0].valeur.Type, new Font("Arial", 30, FontStyle.Bold), Brushes.Black, new Point(polViews[0].Origine.X, polViews[0].Origine.Y-50));
             foreach (IndexedValueView view in polViews)
             {
-                view.Dessine(e.Graphics);
+                view.Dessine(e.Graphics, theWorld);
             }
             e.Graphics.DrawRectangle(p, new Rectangle(GrpRectangle.X, GrpRectangle.Y, GrpRectangle.Width-30, GrpRectangle.Height-40));
             e.Graphics.DrawString("" + grpViews[0].valeur.Type, new Font("Arial", 30, FontStyle.Bold), Brushes.Black, new Point(grpViews[0].Origine.X, grpViews[0].Origine.Y - 50));
             foreach (IndexedValueView view in grpViews)
             {
-                view.Dessine(e.Graphics);
+                view.Dessine(e.Graphics, theWorld);
             }
             e.Graphics.DrawRectangle(p, new Rectangle(PerCrsRectangle.X, PerCrsRectangle.Y, PerCrsRectangle.Width, PerCrsRectangle.Height - 40));
             e.Graphics.DrawString("" + perCrsViews[0].valeur.Type, new Font("Arial", 30, FontStyle.Bold), Brushes.Black, new Point(perCrsViews[0].Origine.X, perCrsViews[0].Origine.Y - 50));
             foreach (IndexedValueView view in perCrsViews)
             {
-                view.Dessine(e.Graphics);
+                view.Dessine(e.Graphics, theWorld);
             }
             foreach (IndexedValueView view in I1Views)
             {
-                view.Dessine(e.Graphics);
+                view.Dessine(e.Graphics, theWorld);
             }
             foreach (IndexedValueView view in I2Views)
             {
-                view.Dessine(e.Graphics);
+                view.Dessine(e.Graphics, theWorld);
             }
         }
         private void NextButton_Click(object sender, EventArgs e)
