@@ -260,57 +260,6 @@ namespace BaseSim2023
             return res;
         }
 
-        private IndexedValueView elementSelection(Point p)
-        {
-            IndexedValueView res = null;
-            int i = 0;
-            while (res == null && i < grpViews.Count)
-            {
-                if (grpViews[i].Contient(p))
-                {
-                    res = grpViews[i];
-                }
-                i++;
-            }
-            if (res == null)
-            {
-                i = 0;
-                while (res == null && i < I1Views.Count)
-                {
-                    if (I1Views[i].Contient(p))
-                    {
-                        res = I1Views[i];
-                    }
-                    i++;
-                }
-                if (res == null)
-                {
-                    i = 0;
-                    while (res == null && i < I2Views.Count)
-                    {
-                        if (I2Views[i].Contient(p))
-                        {
-                            res = I2Views[i];
-                        }
-                        i++;
-                    }
-                    if (res == null)
-                    {
-                        i = 0;
-                        while (res == null && i < perCrsViews.Count)
-                        {
-                            if (perCrsViews[i].Contient(p))
-                            {
-                                res = perCrsViews[i];
-                            }
-                            i++;
-                        }
-                    }
-                }
-            }
-            return res;
-        }
-
         private void GameView_MouseDown(object sender, MouseEventArgs e)
         {   
             if (e.Button == MouseButtons.Left)
@@ -322,15 +271,6 @@ namespace BaseSim2023
                     if (fen.ShowDialog() == DialogResult.OK)
                     {
                         GameController.ApplyPolicyChanges(selection.valeur.Name + " " + fen.numVal());
-                    }
-                }
-                else
-                {
-                    selection = elementSelection(e.Location);
-                    if (selection != null)
-                    {
-                        MessageBoxButtons buttons = MessageBoxButtons.OK;
-                        MessageBox.Show(selection.valeur.Description, "", buttons);
                     }
                 }
             }
