@@ -62,6 +62,7 @@
       <DependentUpon>GameView.cs</DependentUpon>
     </Compile>
     <Compile Include="IndexedValue.cs" />
+    <Compile Include="Lien.cs" />
     <Compile Include="policyChange.cs">
       <SubType>Form</SubType>
     </Compile>
