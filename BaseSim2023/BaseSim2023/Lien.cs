@@ -13,7 +13,7 @@ namespace BaseSim2023
         public IndexedValueView Destination { get; set; }
         public void Dessine(Graphics g)
         {
-            g.DrawLine(Pens.Black, Source.Origine, Destination.Origine);
+            g.DrawLine(Pens.Black, Source.Origine, new Point((Destination.Origine.X + Destination.taille.Width / 2), (Destination.Origine.Y + Destination.taille.Height / 2)));
         }
     }
 }

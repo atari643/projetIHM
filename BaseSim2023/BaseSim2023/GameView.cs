@@ -24,6 +24,7 @@ namespace BaseSim2023
         private List<IndexedValueView> I2Views;
         private List<IndexedValueView> globViews;
         List<Lien> listLiens = new List<Lien>();
+        private List<IndexedValueView> listeNonLiens = new List<IndexedValueView>();
         IndexedValueView survole;
         private int w;
         private int h;
@@ -318,7 +319,10 @@ namespace BaseSim2023
         {
             IndexedValueView survole = polSelection(e.Location);
             listLiens.Clear();
+            listeNonLiens.Clear();
+            listeNonLiens.AddRange(globViews);
             if (survole != null) {
+                listeNonLiens.Remove(survole);
                 foreach (IndexedValue iv in survole.valeur.OutputWeights.Keys)
                 {
                     IndexedValueView v = null;
@@ -336,7 +340,19 @@ namespace BaseSim2023
                     {
                         Lien lien = new Lien { Source = survole, Destination = v };
                         listLiens.Add(lien);
+                        listeNonLiens.Remove(v);
                     }
+                }
+            }
+            foreach (IndexedValueView ivv in globViews)
+            {
+                ivv.opacite = 255;
+            }
+            if (listeNonLiens.Count() != globViews.Count())
+            {
+                foreach (IndexedValueView ivv in listeNonLiens)
+                {
+                    ivv.opacite = 25;
                 }
             }
             Refresh();
