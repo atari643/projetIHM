@@ -20,6 +20,8 @@ namespace BaseSim2023
 
         public Color couleur { get; set; }
 
+        public int opacite { get; set; }
+
         public int Epaisseur { get; set; }
 
         public bool Contient(Point p)
@@ -42,21 +44,17 @@ namespace BaseSim2023
             theWorld = world;
             if (valeur.Active == false && valeur.AvailableAt <= theWorld.Turns)
             {
-                couleur = Color.Yellow;
+                couleur = Color.FromArgb(opacite, 255, 255, 0);
             }
             else if (valeur.Active == false)
             {
-                couleur = Color.Red;
+                couleur = Color.FromArgb(opacite, 255, 0, 0);
 
             }
             else if (valeur.Active == true)
             {
-                
-                couleur = Color.Green;
+                couleur = Color.FromArgb(opacite, 9, 150, 40);
             }
-            
-            
-            
             Point PositionEcran = Origine;
             Rectangle r = new Rectangle(PositionEcran, taille);
             Pen p = new Pen(couleur, Epaisseur = 2);

@@ -22,6 +22,10 @@ namespace BaseSim2023
         private List<IndexedValueView> perCrsViews;
         private List<IndexedValueView> I1Views;
         private List<IndexedValueView> I2Views;
+        private List<IndexedValueView> globViews;
+        List<Lien> listLiens = new List<Lien>();
+        private List<IndexedValueView> listeNonLiens = new List<IndexedValueView>();
+        IndexedValueView survole;
         private int w;
         private int h;
         private int xPol;
@@ -42,7 +46,7 @@ namespace BaseSim2023
 
             foreach (IndexedValue p in theWorld.Policies)
             {
-                IndexedValueView view = new IndexedValueView{ Origine = new Point(xPol, yPol), valeur = p }; 
+                IndexedValueView view = new IndexedValueView{ Origine = new Point(xPol, yPol), valeur = p, opacite = 255 }; 
                 polViews.Add(view);
                 xPol += w+margin;
                 if (xPol + w > PolRectangle.Right)
@@ -57,7 +61,7 @@ namespace BaseSim2023
             grpViews = new List<IndexedValueView>();
             foreach (IndexedValue p in theWorld.Groups)
             {
-                IndexedValueView view = new IndexedValueView { Origine = new Point(xGrp, yGrp), valeur = p };
+                IndexedValueView view = new IndexedValueView { Origine = new Point(xGrp, yGrp), valeur = p, opacite = 255 };
                 grpViews.Add(view);
                 xGrp += w + margin;
                 if (xGrp + w > GrpRectangle.Right)
@@ -72,7 +76,7 @@ namespace BaseSim2023
             perCrsViews = new List<IndexedValueView>();
             foreach (IndexedValue p in theWorld.Perks)
             {
-                IndexedValueView view = new IndexedValueView { Origine = new Point(xPerCrs, yPerCrs), valeur = p };
+                IndexedValueView view = new IndexedValueView { Origine = new Point(xPerCrs, yPerCrs), valeur = p, opacite = 255 };
                 perCrsViews.Add(view);
                 xPerCrs += w + margin;
                 if (xPerCrs + w > PerCrsRectangle.Right)
@@ -83,7 +87,7 @@ namespace BaseSim2023
             }
             foreach (IndexedValue p in theWorld.Crises)
             {
-                IndexedValueView view = new IndexedValueView { Origine = new Point(xPerCrs, yPerCrs), valeur = p };
+                IndexedValueView view = new IndexedValueView { Origine = new Point(xPerCrs, yPerCrs), valeur = p, opacite = 255 };
                 perCrsViews.Add(view);
                 xPerCrs += w + margin;
                 if (xPerCrs + w > PerCrsRectangle.Right)
@@ -100,7 +104,7 @@ namespace BaseSim2023
             {
 
                 IndexedValue p = theWorld.Indicators[i];
-                IndexedValueView view = new IndexedValueView { Origine = new Point(xI1, yI1), valeur = p };
+                IndexedValueView view = new IndexedValueView { Origine = new Point(xI1, yI1), valeur = p, opacite = 255 };
                 I1Views.Add(view);
                 xI1 += w + margin;
                 if (xI1 + w > I1Rectangle.Right)
@@ -115,7 +119,7 @@ namespace BaseSim2023
             for (int i = (theWorld.Indicators.Count/2)+1; i < theWorld.Indicators.Count; i++)
             {
                 IndexedValue p = theWorld.Indicators[i];
-                IndexedValueView view = new IndexedValueView { Origine = new Point(xI2, yI2), valeur = p };
+                IndexedValueView view = new IndexedValueView { Origine = new Point(xI2, yI2), valeur = p, opacite = 255 };
                 I2Views.Add(view);
                 xI2 += w + margin;
                 if (xI2 + w > I2Rectangle.Right)
@@ -124,6 +128,12 @@ namespace BaseSim2023
                     yI2 += h + margin;
                 }
             }
+            globViews = new List<IndexedValueView>();
+            globViews.AddRange(grpViews);
+            globViews.AddRange(polViews);
+            globViews.AddRange(perCrsViews);
+            globViews.AddRange(I1Views);
+            globViews.AddRange(I2Views);
         }
         
         /// <summary>
@@ -193,6 +203,10 @@ namespace BaseSim2023
             foreach (IndexedValueView view in I2Views)
             {
                 view.Dessine(e.Graphics, theWorld);
+            }
+            foreach (Lien l in listLiens)
+            {
+                l.Dessine(e.Graphics);
             }
         }
         private void NextButton_Click(object sender, EventArgs e)
@@ -264,49 +278,13 @@ namespace BaseSim2023
         {
             IndexedValueView res = null;
             int i = 0;
-            while (res == null && i < grpViews.Count)
+            while (res == null && i < globViews.Count)
             {
-                if (grpViews[i].Contient(p))
+                if (globViews[i].Contient(p))
                 {
-                    res = grpViews[i];
+                    res = globViews[i];
                 }
                 i++;
-            }
-            if (res == null)
-            {
-                i = 0;
-                while (res == null && i < I1Views.Count)
-                {
-                    if (I1Views[i].Contient(p))
-                    {
-                        res = I1Views[i];
-                    }
-                    i++;
-                }
-                if (res == null)
-                {
-                    i = 0;
-                    while (res == null && i < I2Views.Count)
-                    {
-                        if (I2Views[i].Contient(p))
-                        {
-                            res = I2Views[i];
-                        }
-                        i++;
-                    }
-                    if (res == null)
-                    {
-                        i = 0;
-                        while (res == null && i < perCrsViews.Count)
-                        {
-                            if (perCrsViews[i].Contient(p))
-                            {
-                                res = perCrsViews[i];
-                            }
-                            i++;
-                        }
-                    }
-                }
             }
             return res;
         }
@@ -339,17 +317,54 @@ namespace BaseSim2023
 
         private void GameView_MouseMove(object sender, MouseEventArgs e)
         {
-            IndexedValueView selection = polSelection(e.Location);
-            if (selection != null) {
-                List<IndexedValue> list = new List<IndexedValue>();
-                foreach (IndexedValue test in selection.valeur.OutputWeights.Keys)
+            IndexedValueView survole = polSelection(e.Location);
+            listLiens.Clear();
+            listeNonLiens.Clear();
+            listeNonLiens.AddRange(globViews);
+            if (survole != null) {
+                listeNonLiens.Remove(survole);
+                foreach (IndexedValue iv in survole.valeur.OutputWeights.Keys)
                 {
-                    list.Add(test);
+                    IndexedValueView v = null;
+                    int i = 0;
+                    while (v == null && i < globViews.Count())
+                    {
+                        if (globViews[i].valeur == iv)
+                        {
+                            v = globViews[i];
+                            Console.WriteLine(v);
+                        }
+                        i++;
+                    }
+                    if (v != null)
+                    {
+                        Color color;
+                        if (survole.valeur.OutputWeights[v.valeur] > 0)
+                        {
+                            color = Color.LawnGreen;
+                        }
+                        else
+                        {
+                            color = Color.Red;
+                        }
+                        Lien lien = new Lien { Source = survole, Destination = v, Color=color, Width = survole.valeur.OutputWeights[v.valeur] };
+                        listLiens.Add(lien);
+                        listeNonLiens.Remove(v);
+                    }
                 }
-                Console.WriteLine(list.Count);
             }
-            
-            
+            foreach (IndexedValueView ivv in globViews)
+            {
+                ivv.opacite = 255;
+            }
+            if (listeNonLiens.Count() != globViews.Count())
+            {
+                foreach (IndexedValueView ivv in listeNonLiens)
+                {
+                    ivv.opacite = 25;
+                }
+            }
+            Refresh();
         }
     }
 }
