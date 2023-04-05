@@ -11,9 +11,11 @@ namespace BaseSim2023
     {
         public IndexedValueView Source { get; set; }
         public IndexedValueView Destination { get; set; }
+        public Color Color { get; set; }
+        public double Width { get; set;  }
         public void Dessine(Graphics g)
         {
-            g.DrawLine(Pens.Black, Source.Origine, new Point((Destination.Origine.X + Destination.taille.Width / 2), (Destination.Origine.Y + Destination.taille.Height / 2)));
+            g.DrawLine(new Pen(Color, (float) Width*100), new Point((Source.Origine.X + Destination.taille.Width / 2), Source.Origine.Y), new Point((Destination.Origine.X + Destination.taille.Width / 2), (Destination.Origine.Y + Destination.taille.Height / 2)));
         }
     }
 }

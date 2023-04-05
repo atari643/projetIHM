@@ -53,8 +53,7 @@ namespace BaseSim2023
             }
             else if (valeur.Active == true)
             {
-
-                couleur = Color.FromArgb(opacite, 0, 255, 0);
+                couleur = Color.FromArgb(opacite, 9, 150, 40);
             }
             Point PositionEcran = Origine;
             Rectangle r = new Rectangle(PositionEcran, taille);
