@@ -347,7 +347,12 @@ namespace BaseSim2023
                         {
                             color = Color.Red;
                         }
-                        Lien lien = new Lien { Source = survole, Destination = v, Color=color, Width = survole.valeur.OutputWeights[v.valeur] };
+                        double width = survole.valeur.OutputWeights[v.valeur] * 100;
+                        if (width > 25)
+                        {
+                            width = 25;
+                        }
+                        Lien lien = new Lien { Source = survole, Destination = v, Color=color, Width = width };
                         listLiens.Add(lien);
                         listeNonLiens.Remove(v);
                     }
