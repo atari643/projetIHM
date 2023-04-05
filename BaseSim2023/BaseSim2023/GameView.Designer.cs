@@ -59,7 +59,6 @@ namespace BaseSim2023
             this.turnLabel.Size = new System.Drawing.Size(19, 13);
             this.turnLabel.TabIndex = 3;
             this.turnLabel.Text = "    ";
-            this.turnLabel.Click += new System.EventHandler(this.turnLabel_Click);
             // 
             // moneyLabel
             // 
@@ -101,6 +100,7 @@ namespace BaseSim2023
             this.inputTextBox.Name = "inputTextBox";
             this.inputTextBox.Size = new System.Drawing.Size(100, 20);
             this.inputTextBox.TabIndex = 0;
+            this.inputTextBox.Visible = false;
             this.inputTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputTextBox_KeyDown);
             // 
             // outputListBox
@@ -112,6 +112,7 @@ namespace BaseSim2023
             this.outputListBox.Name = "outputListBox";
             this.outputListBox.Size = new System.Drawing.Size(172, 30);
             this.outputListBox.TabIndex = 1;
+            this.outputListBox.Visible = false;
             // 
             // GameView
             // 

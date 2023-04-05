@@ -20,7 +20,8 @@ namespace BaseSim2023
             DifficultyView dv = new DifficultyView();
             dv.ShowDialog();
             diff = dv.Difficulty;
-            WorldState theWorld = new WorldState(diff, "../../Logres.xml");
+            int turn = dv.turn;
+            WorldState theWorld = new WorldState(diff, "../../Logres.xml", turn);
             GameView theView = new GameView(theWorld);
             GameController.SetView(theView);
             GameController.SetWorld(theWorld);

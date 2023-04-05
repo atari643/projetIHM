@@ -19,7 +19,8 @@ namespace BaseSim2023
         public enum Difficulty { Easy, Medium, Hard };
         #endregion
         #region world-status variables for a single game
-        private int turnsLeft;
+        DifficultyView gameView = new DifficultyView();
+        public int turnsLeft;
         private int turns = 0;
 
         private readonly List<IndexedValue> values = new List<IndexedValue>();
@@ -86,6 +87,8 @@ namespace BaseSim2023
             if (turnsLeft > 0)
             {
                 turnsLeft--;
+
+
             }
             if (crises.Exists(c => c.Result == IndexedValue.ResultType.Lose && c.Active == true) || money < 0)
             {
@@ -95,6 +98,9 @@ namespace BaseSim2023
             else if (perks.Exists(p => p.Result == IndexedValue.ResultType.Win && p.Active == true)) {
                 GameController.WinDialog();
                 turnsLeft = 0;
+            }else if (turnsLeft == 0)
+            {
+                GameController.LoseDialog(crises.Find(c => c.Result == IndexedValue.ResultType.Lose && c.Active == true));
             }
         }
         /// <summary>
@@ -144,12 +150,12 @@ namespace BaseSim2023
         /// </summary>
         /// <param name="diff">The difficulty for the game</param>
         /// <param name="file">The XML file to load for the world</param>
-        public WorldState(Difficulty diff, string file, int turnsLeft = -1)
+        public WorldState(Difficulty diff, string file, int turn)
         {
-            this.turnsLeft = turnsLeft;
+            turnsLeft = turn;
             TheDifficulty = diff;
             LoadWorldFrom(file, diff);
-            switch(diff)
+            switch (diff)
             {
                 case Difficulty.Easy:
                     glory = 50;
