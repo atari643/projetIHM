@@ -264,7 +264,6 @@ namespace BaseSim2023
             int i = 0;
             while (res == null && i < polViews.Count)
             {
-               
                 if (polViews[i].Contient(p))
                 {
                     res = polViews[i];
@@ -329,7 +328,7 @@ namespace BaseSim2023
             listLiens.Clear();
             listeNonLiens.Clear();
             listeNonLiens.AddRange(globViews);
-            if (survole != null) {
+            if (survole != null && !déplacement) {
                 listeNonLiens.Remove(survole);
                 foreach (IndexedValue iv in survole.valeur.OutputWeights.Keys)
                 {
