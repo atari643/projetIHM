@@ -134,6 +134,7 @@ namespace BaseSim2023
             this.DoubleClick += new System.EventHandler(this.GameView_DoubleClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameView_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GameView_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GameView_MouseUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
