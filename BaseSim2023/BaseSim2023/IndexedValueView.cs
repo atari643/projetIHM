@@ -55,13 +55,13 @@ namespace BaseSim2023
                 couleur = Color.Green;
             }
             
-            
-            
             Point PositionEcran = Origine;
             Rectangle r = new Rectangle(PositionEcran, taille);
             Pen p = new Pen(couleur, Epaisseur = 2);
             g.DrawRectangle(p, r);
             g.DrawString("" + valeur, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, Origine);
+            g.DrawString("" + valeur.MinValue, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, new Point(Origine.X, (Origine.Y + taille.Height / 2)));
+            g.DrawString("" + valeur.MaxValue, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, new Point((Origine.X+taille.Width-40), (Origine.Y + taille.Height / 2)));
         }
     }
     

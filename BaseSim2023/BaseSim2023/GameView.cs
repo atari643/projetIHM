@@ -186,10 +186,14 @@ namespace BaseSim2023
             {
                 view.Dessine(e.Graphics, theWorld);
             }
+            e.Graphics.DrawRectangle(p, new Rectangle(I1Rectangle.X, I1Rectangle.Y, I1Rectangle.Width-150, I1Rectangle.Height - 40));
+            e.Graphics.DrawString("" + I1Views[0].valeur.Type, new Font("Arial", 30, FontStyle.Bold), Brushes.Black, new Point(I1Views[0].Origine.X, I1Views[0].Origine.Y - 50));
             foreach (IndexedValueView view in I1Views)
             {
                 view.Dessine(e.Graphics, theWorld);
             }
+            e.Graphics.DrawRectangle(p, new Rectangle(I2Rectangle.X, I2Rectangle.Y, I2Rectangle.Width, I2Rectangle.Height - 40));
+            e.Graphics.DrawString("" + I2Views[0].valeur.Type, new Font("Arial", 30, FontStyle.Bold), Brushes.Black, new Point(I2Views[0].Origine.X, I2Views[0].Origine.Y - 50));
             foreach (IndexedValueView view in I2Views)
             {
                 view.Dessine(e.Graphics, theWorld);
@@ -238,11 +242,6 @@ namespace BaseSim2023
         }
 
         #endregion
-
-        private void turnLabel_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private IndexedValueView polSelection(Point p)
         {
