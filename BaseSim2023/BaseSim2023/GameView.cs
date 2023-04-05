@@ -13,7 +13,6 @@ namespace BaseSim2023
         private Rectangle PolRectangle { get; set; } = new Rectangle(0, 700, 1920, 300);
         private Rectangle GrpRectangle { get; set; } = new Rectangle(500, 400, 600, 300);
         private Rectangle PerCrsRectangle { get; set; } = new Rectangle(0, 75, 1920, 300);
-
         private Rectangle I1Rectangle { get; set; } = new Rectangle(0, 400, 600, 300);
         private Rectangle I2Rectangle { get; set; } = new Rectangle(1200, 400, 600, 300);
 
@@ -26,6 +25,7 @@ namespace BaseSim2023
         List<Lien> listLiens = new List<Lien>();
         private List<IndexedValueView> listeNonLiens = new List<IndexedValueView>();
         IndexedValueView survole;
+        bool déplacement;
         private int w;
         private int h;
         private int xPol;
@@ -294,7 +294,7 @@ namespace BaseSim2023
             if (e.Button == MouseButtons.Left)
             {
                 IndexedValueView selection = polSelection(e.Location);
-                if (selection != null)
+                if (selection != null && selection.valeur.Active == true)
                 {
                     policyChange fen = new policyChange(selection.valeur.Name, selection.valeur.MinValue, selection.valeur.MaxValue, selection.valeur.Value);
                     if (fen.ShowDialog() == DialogResult.OK)
@@ -310,6 +310,14 @@ namespace BaseSim2023
                         MessageBoxButtons buttons = MessageBoxButtons.OK;
                         MessageBox.Show(selection.valeur.Description, "", buttons);
                     }
+                }
+            }
+            else
+            {
+                IndexedValueView selection = elementSelection(e.Location);
+                if (selection != null)
+                {
+                    déplacement = true;
                 }
             }
             Refresh();
@@ -358,6 +366,10 @@ namespace BaseSim2023
                     }
                 }
             }
+            else
+            {
+                survole = elementSelection(e.Location);
+            }
             foreach (IndexedValueView ivv in globViews)
             {
                 ivv.opacite = 255;
@@ -369,7 +381,16 @@ namespace BaseSim2023
                     ivv.opacite = 25;
                 }
             }
+            if (survole != null && déplacement)
+            {
+                survole.Deplace(new Point(e.Location.X - survole.taille.Width / 2, e.Location.Y - survole.taille.Height / 2));
+            }
             Refresh();
+        }
+
+        private void GameView_MouseUp(object sender, MouseEventArgs e)
+        {
+            déplacement = false;
         }
     }
 }

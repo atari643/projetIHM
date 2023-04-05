@@ -27,15 +27,6 @@ namespace BaseSim2023
         public bool Contient(Point p)
         {
             Rectangle r = new Rectangle(Origine, taille);
-            if (valeur.Active == false && valeur.AvailableAt <= theWorld.Turns)
-            {
-                couleur = Color.Red;
-                return r.Contains(p);
-
-            }else if(valeur.Active == false)
-            {
-                return false;
-            }
             return r.Contains(p);
         }
 
@@ -60,6 +51,10 @@ namespace BaseSim2023
             Pen p = new Pen(couleur, Epaisseur = 2);
             g.DrawRectangle(p, r);
             g.DrawString("" + valeur, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, Origine);
+        }
+        public void Deplace(Point p)
+        {
+            Origine = p;
         }
     }
     
