@@ -323,7 +323,7 @@ namespace BaseSim2023
 
         private void GameView_MouseMove(object sender, MouseEventArgs e)
         {
-            IndexedValueView survole = polSelection(e.Location);
+            IndexedValueView survole = elementSelection(e.Location);
             listLiens.Clear();
             listeNonLiens.Clear();
             listeNonLiens.AddRange(globViews);
@@ -363,10 +363,6 @@ namespace BaseSim2023
                         listeNonLiens.Remove(v);
                     }
                 }
-            }
-            else
-            {
-                survole = elementSelection(e.Location);
             }
             foreach (IndexedValueView ivv in globViews)
             {
