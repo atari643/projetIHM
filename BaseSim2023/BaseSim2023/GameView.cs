@@ -292,7 +292,7 @@ namespace BaseSim2023
             if (e.Button == MouseButtons.Left)
             {
                 IndexedValueView selection = polSelection(e.Location);
-                if (selection != null && selection.valeur.Active == true)
+                if (selection != null && (selection.valeur.Active == true || (selection.valeur.Active == false && selection.valeur.AvailableAt <= theWorld.Turns)))
                 {
                     policyChange fen = new policyChange(selection.valeur.Name, selection.valeur.MinValue, selection.valeur.MaxValue, selection.valeur.Value);
                     if (fen.ShowDialog() == DialogResult.OK)
